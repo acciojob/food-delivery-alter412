@@ -4,6 +4,15 @@ public class OperationStatusModel {
 
 	private String operationResult;
 	private String operationName;
+
+	public OperationStatusModel() {
+	}
+
+	public OperationStatusModel(String operationResult, String operationName) {
+		this.operationResult = operationResult;
+		this.operationName = operationName;
+	}
+
 	public String getOperationResult() {
 		return operationResult;
 	}

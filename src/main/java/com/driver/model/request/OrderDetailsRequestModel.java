@@ -5,6 +5,16 @@ public class OrderDetailsRequestModel {
 	private String[] items;
 	private float cost;
 	private String userId;
+
+	public OrderDetailsRequestModel() {
+	}
+
+	public OrderDetailsRequestModel(String[] items, float cost, String userId) {
+		this.items = items;
+		this.cost = cost;
+		this.userId = userId;
+	}
+
 	public float getCost() {
 		return cost;
 	}
