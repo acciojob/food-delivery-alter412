@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
-	@Autowired
-	OrderServiceImpl os;
+	//@Autowired
+	OrderServiceImpl os = new OrderServiceImpl();
 
 	@GetMapping(path="/{id}")
 	public OrderDetailsResponse getOrder(@PathVariable String id) throws Exception{

@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserController {
 
-	@Autowired
-	UserServiceImpl us;
+	//@Autowired
+	UserServiceImpl us = new UserServiceImpl();
 
 	@GetMapping("/get/{id}")
 	public UserResponse getUser(@PathVariable String id) throws Exception{

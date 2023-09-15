@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/foods")
 public class FoodController {
 
-	@Autowired
-	FoodServiceImpl fs;
+	//@Autowired
+	FoodServiceImpl fs = new FoodServiceImpl();
 
 	@GetMapping(path="/{id}")
 	public FoodDetailsResponse getFood(@PathVariable String id) throws Exception{
