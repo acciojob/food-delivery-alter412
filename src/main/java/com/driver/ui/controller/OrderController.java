@@ -2,6 +2,7 @@ package com.driver.ui.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.driver.model.request.OrderDetailsRequestModel;
 import com.driver.model.response.OperationStatusModel;
@@ -43,13 +44,46 @@ public class OrderController {
 	
 	@PostMapping()
 	public OrderDetailsResponse createOrder(@RequestBody OrderDetailsRequestModel order) {
-		return os.createOrder(order);
+
+		OrderDto orderDto = new OrderDto();
+        orderDto.setOrderId(String.valueOf(UUID.randomUUID()));
+
+        orderDto.setUserId(order.getUserId());
+        orderDto.setStatus(true);
+        orderDto.setItems(order.getItems());
+        orderDto.setCost(order.getCost());
+
+        OrderDto savedDto = os.createOrder(orderDto);
+
+        OrderDetailsResponse response = new OrderDetailsResponse();
+        response.setOrderId(savedDto.getOrderId());
+        response.setStatus(savedDto.isStatus());
+        response.setItems(savedDto.getItems());
+        response.setCost(savedDto.getCost());
+        response.setUserId(savedDto.getUserId());
+
+        return response;
 	}
 		
 	@PutMapping(path="/{id}")
 	public OrderDetailsResponse updateOrder(@PathVariable String id, @RequestBody OrderDetailsRequestModel order) throws Exception{
-		OrderDetailsResponse response = os.updateOrder(id,order);
-		return response;
+		OrderDto orderDto = new OrderDto();
+        orderDto.setOrderId(id);
+        orderDto.setCost(order.getCost());
+        orderDto.setItems(order.getItems());
+        orderDto.setUserId(order.getUserId());
+        orderDto.setStatus(true);
+
+        OrderDto savedDto = os.updateOrderDetails(id,orderDto);
+
+        OrderDetailsResponse response = new OrderDetailsResponse();
+        response.setOrderId(savedDto.getOrderId());
+        response.setUserId(savedDto.getUserId());
+        response.setCost(savedDto.getCost());
+        response.setItems(savedDto.getItems());
+        response.setStatus(savedDto.isStatus());
+
+        return response;
 	}
 	
 	@DeleteMapping(path = "/{id}")

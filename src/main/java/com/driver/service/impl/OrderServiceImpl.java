@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
 
     @Autowired
     OrderRepository or;
@@ -57,51 +57,52 @@ public class OrderServiceImpl implements OrderService{
         Iterable<OrderEntity> orderEntities = or.findAll();
         List<OrderDto> ans = new ArrayList<>();
 
-        for(OrderEntity x : orderEntities){
+        for (OrderEntity x : orderEntities) {
             ans.add(Mapper.orderEntityToDto(x));
         }
 
         return ans;
     }
-
-    public OrderDetailsResponse createOrder(OrderDetailsRequestModel order) {
-        OrderDto orderDto = new OrderDto();
-        orderDto.setOrderId(String.valueOf(UUID.randomUUID()));
-
-        orderDto.setUserId(order.getUserId());
-        orderDto.setStatus(true);
-        orderDto.setItems(order.getItems());
-        orderDto.setCost(order.getCost());
-
-        OrderDto savedDto = createOrder(orderDto);
-
-        OrderDetailsResponse response = new OrderDetailsResponse();
-        response.setOrderId(savedDto.getOrderId());
-        response.setStatus(savedDto.isStatus());
-        response.setItems(savedDto.getItems());
-        response.setCost(savedDto.getCost());
-        response.setUserId(savedDto.getUserId());
-
-        return response;
-    }
-
-    public OrderDetailsResponse updateOrder(String id, OrderDetailsRequestModel order) throws Exception {
-        OrderDto orderDto = new OrderDto();
-        orderDto.setOrderId(id);
-        orderDto.setCost(order.getCost());
-        orderDto.setItems(order.getItems());
-        orderDto.setUserId(order.getUserId());
-        orderDto.setStatus(true);
-
-        OrderDto savedDto = updateOrderDetails(id,orderDto);
-
-        OrderDetailsResponse response = new OrderDetailsResponse();
-        response.setOrderId(savedDto.getOrderId());
-        response.setUserId(savedDto.getUserId());
-        response.setCost(savedDto.getCost());
-        response.setItems(savedDto.getItems());
-        response.setStatus(savedDto.isStatus());
-
-        return response;
-    }
+//
+//    public OrderDetailsResponse createOrder(OrderDetailsRequestModel order) {
+//        OrderDto orderDto = new OrderDto();
+//        orderDto.setOrderId(String.valueOf(UUID.randomUUID()));
+//
+//        orderDto.setUserId(order.getUserId());
+//        orderDto.setStatus(true);
+//        orderDto.setItems(order.getItems());
+//        orderDto.setCost(order.getCost());
+//
+//        OrderDto savedDto = createOrder(orderDto);
+//
+//        OrderDetailsResponse response = new OrderDetailsResponse();
+//        response.setOrderId(savedDto.getOrderId());
+//        response.setStatus(savedDto.isStatus());
+//        response.setItems(savedDto.getItems());
+//        response.setCost(savedDto.getCost());
+//        response.setUserId(savedDto.getUserId());
+//
+//        return response;
+//    }
+//
+//    public OrderDetailsResponse updateOrder(String id, OrderDetailsRequestModel order) throws Exception {
+//        OrderDto orderDto = new OrderDto();
+//        orderDto.setOrderId(id);
+//        orderDto.setCost(order.getCost());
+//        orderDto.setItems(order.getItems());
+//        orderDto.setUserId(order.getUserId());
+//        orderDto.setStatus(true);
+//
+//        OrderDto savedDto = updateOrderDetails(id,orderDto);
+//
+//        OrderDetailsResponse response = new OrderDetailsResponse();
+//        response.setOrderId(savedDto.getOrderId());
+//        response.setUserId(savedDto.getUserId());
+//        response.setCost(savedDto.getCost());
+//        response.setItems(savedDto.getItems());
+//        response.setStatus(savedDto.isStatus());
+//
+//        return response;
+//    }
+//}
 }

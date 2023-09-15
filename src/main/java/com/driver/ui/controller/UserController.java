@@ -86,15 +86,15 @@ public class UserController {
 
 			us.deleteUser(id);
 			OperationStatusModel operationStatusModel = new OperationStatusModel();
-			operationStatusModel.setOperationName(RequestOperationName.DELETE.name());
-			operationStatusModel.setOperationResult(RequestOperationStatus.SUCCESS.name());
+			operationStatusModel.setOperationName(RequestOperationName.DELETE.toString());
+			operationStatusModel.setOperationResult(RequestOperationStatus.SUCCESS.toString());
 			return operationStatusModel;
 
 		}catch (Exception e){
 
 			OperationStatusModel operationStatusModel = new OperationStatusModel();
-			operationStatusModel.setOperationName(RequestOperationName.DELETE.name());
-			operationStatusModel.setOperationResult(RequestOperationStatus.ERROR.name());
+			operationStatusModel.setOperationName(RequestOperationName.DELETE.toString());
+			operationStatusModel.setOperationResult(RequestOperationStatus.ERROR.toString());
 			return operationStatusModel;
 		}
 	}
