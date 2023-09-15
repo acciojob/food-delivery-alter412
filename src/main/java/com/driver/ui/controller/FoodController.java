@@ -2,6 +2,7 @@ package com.driver.ui.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.driver.model.request.FoodDetailsRequestModel;
 import com.driver.model.response.FoodDetailsResponse;
@@ -30,19 +31,59 @@ public class FoodController {
 
 	@GetMapping(path="/{id}")
 	public FoodDetailsResponse getFood(@PathVariable String id) throws Exception{
-		FoodDetailsResponse foodDetailsResponse = fs.getFood(id);
+
+		FoodDto response = fs.getFoodById(id);
+
+		FoodDetailsResponse foodDetailsResponse = new FoodDetailsResponse();
+
+		foodDetailsResponse.setFoodPrice(response.getFoodPrice());
+		foodDetailsResponse.setFoodCategory(response.getFoodCategory());
+		foodDetailsResponse.setFoodName(response.getFoodName());
+		foodDetailsResponse.setFoodId(response.getFoodId());
+
 		return foodDetailsResponse;
 	}
 
 	@PostMapping("/create")
 	public FoodDetailsResponse createFood(@RequestBody FoodDetailsRequestModel foodDetails) {
-		FoodDetailsResponse foodDetailsResponse = fs.createFood(foodDetails);
-		return foodDetailsResponse;
+		FoodDto foodDto = new FoodDto();
+
+		foodDto.setFoodId(String.valueOf(UUID.randomUUID()));
+		foodDto.setFoodCategory(foodDetails.getFoodCategory());
+		foodDto.setFoodPrice(foodDetails.getFoodPrice());
+		foodDto.setFoodName(foodDetails.getFoodName());
+
+		FoodDto responseDto = fs.createFood(foodDto);
+		FoodDetailsResponse response = new FoodDetailsResponse();
+
+		response.setFoodId(responseDto.getFoodId());
+		response.setFoodName(responseDto.getFoodName());
+		response.setFoodCategory(responseDto.getFoodCategory());
+		response.setFoodPrice(responseDto.getFoodPrice());
+
+		return response;
 	}
 
 	@PutMapping(path="/{id}")
 	public FoodDetailsResponse updateFood(@PathVariable String id, @RequestBody FoodDetailsRequestModel foodDetails) throws Exception{
-		FoodDetailsResponse foodDetailsResponse = fs.updateFood(id,foodDetails);
+
+		FoodDto foodDto = new FoodDto();
+
+		foodDto.setFoodId(id);
+		foodDto.setFoodCategory(foodDetails.getFoodCategory());
+		foodDto.setFoodPrice(foodDetails.getFoodPrice());
+		foodDto.setFoodName(foodDetails.getFoodName());
+
+
+		FoodDto response = fs.updateFoodDetails(id,foodDto);
+
+		FoodDetailsResponse foodDetailsResponse = new FoodDetailsResponse();
+
+		foodDetailsResponse.setFoodId(response.getFoodId());
+		foodDetailsResponse.setFoodName(response.getFoodName());
+		foodDetailsResponse.setFoodCategory(response.getFoodCategory());
+		foodDetailsResponse.setFoodPrice(response.getFoodPrice());
+
 		return foodDetailsResponse;
 	}
 
