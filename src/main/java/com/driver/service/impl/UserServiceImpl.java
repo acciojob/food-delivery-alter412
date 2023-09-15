@@ -22,7 +22,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto createUser(UserDto user) throws Exception {
-        user.setUserId(String.valueOf(UUID.randomUUID()));
 
         UserEntity ue = Mapper.userDtoToEntity(user);
 
@@ -53,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
         UserEntity updatedUser = ur.save(userEntity);
 
-        return Mapper.userEntityToDto(userEntity);
+        return Mapper.userEntityToDto(updatedUser);
     }
 
     @Override

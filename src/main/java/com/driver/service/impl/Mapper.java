@@ -13,7 +13,7 @@ public class Mapper {
         FoodEntity foodEntity = new FoodEntity();
 
         foodEntity.setFoodId(foodDto.getFoodId());
-        foodEntity.setId(foodDto.getId());
+        //foodEntity.setId(foodDto.getId());
         foodEntity.setFoodName(foodDto.getFoodName());
         foodEntity.setFoodCategory(foodDto.getFoodCategory());
         foodEntity.setFoodPrice(foodDto.getFoodPrice());
@@ -24,7 +24,7 @@ public class Mapper {
     public static UserEntity userDtoToEntity(UserDto userDto){
         UserEntity userEntity = new UserEntity();
 
-        userEntity.setId(userDto.getId());
+        //userEntity.setId(userDto.getId());
         userEntity.setEmail(userDto.getEmail());
         userEntity.setUserId(userDto.getUserId());
         userEntity.setFirstName(userDto.getFirstName());
@@ -37,7 +37,7 @@ public class Mapper {
     public static OrderEntity orderDtoToEntity(OrderDto orderDto){
         OrderEntity orderEntity = new OrderEntity();
 
-        orderEntity.setId(orderDto.getId());
+        //orderEntity.setId(orderDto.getId());
         orderEntity.setOrderId(orderDto.getOrderId());
         orderEntity.setUserId(orderDto.getUserId());
         orderEntity.setCost(orderDto.getCost());
