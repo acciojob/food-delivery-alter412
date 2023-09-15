@@ -22,16 +22,20 @@ public class UserController {
 
 	@GetMapping("/get/{id}")
 	public UserResponse getUser(@PathVariable String id) throws Exception{
-		UserDto userDto = us.getUserByUserId(id);
+		UserDto userDto;
+		try {
+			 userDto = us.getUserByUserId(id);
+			UserResponse response = new UserResponse();
 
-		UserResponse response = new UserResponse();
+			response.setEmail(userDto.getEmail());
+			response.setUserId(userDto.getUserId());
+			response.setFirstName(userDto.getFirstName());
+			response.setLastName(userDto.getLastName());
 
-		response.setEmail(userDto.getEmail());
-		response.setUserId(userDto.getUserId());
-		response.setFirstName(userDto.getFirstName());
-		response.setLastName(userDto.getLastName());
-
-		return response;
+			return response;
+		}catch (Exception e){
+			return new UserResponse();
+		}
 	}
 
 	@PostMapping()
