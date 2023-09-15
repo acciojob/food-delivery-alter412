@@ -21,7 +21,7 @@ public class UserController {
 	@Autowired
 	UserServiceImpl us;
 
-	@GetMapping("/get/{id}")
+	@GetMapping("/{id}")
 	public UserResponse getUser(@PathVariable String id) throws Exception{
 		UserDto userDto;
 		try {
