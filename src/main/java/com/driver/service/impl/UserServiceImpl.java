@@ -72,41 +72,41 @@ public class UserServiceImpl implements UserService {
         return ans;
     }
 
-    public UserResponse createUser(UserDetailsRequestModel userDetails) throws Exception{
-        UserDto userDto = new UserDto();
-        userDto.setUserId(String.valueOf(UUID.randomUUID()));
-
-        userDto.setFirstName(userDetails.getFirstName());
-        userDto.setLastName(userDetails.getLastName());
-        userDto.setEmail(userDetails.getEmail());
-
-        UserDto savedDto = createUser(userDto);
-
-        UserResponse response = new UserResponse();
-        response.setLastName(savedDto.getLastName());
-        response.setFirstName(savedDto.getFirstName());
-        response.setEmail(savedDto.getEmail());
-        response.setUserId(savedDto.getUserId());
-
-        return response;
-    }
-
-    public UserResponse updateUser(String id, UserDetailsRequestModel userDetails) throws Exception {
-        UserDto userDto = new UserDto();
-
-        userDto.setUserId(id);
-        userDto.setEmail(userDetails.getEmail());
-        userDto.setFirstName(userDetails.getFirstName());
-        userDto.setLastName(userDetails.getLastName());
-
-        UserDto updatedDto = updateUser(id,userDto);
-
-        UserResponse response = new UserResponse();
-        response.setUserId(updatedDto.getUserId());
-        response.setEmail(updatedDto.getEmail());
-        response.setFirstName(updatedDto.getFirstName());
-        response.setLastName(updatedDto.getLastName());
-
-        return response;
-    }
+//    public UserResponse createUser(UserDetailsRequestModel userDetails) throws Exception{
+//        UserDto userDto = new UserDto();
+//        userDto.setUserId(String.valueOf(UUID.randomUUID()));
+//
+//        userDto.setFirstName(userDetails.getFirstName());
+//        userDto.setLastName(userDetails.getLastName());
+//        userDto.setEmail(userDetails.getEmail());
+//
+//        UserDto savedDto = createUser(userDto);
+//
+//        UserResponse response = new UserResponse();
+//        response.setLastName(savedDto.getLastName());
+//        response.setFirstName(savedDto.getFirstName());
+//        response.setEmail(savedDto.getEmail());
+//        response.setUserId(savedDto.getUserId());
+//
+//        return response;
+//    }
+//
+//    public UserResponse updateUser(String id, UserDetailsRequestModel userDetails) throws Exception {
+//        UserDto userDto = new UserDto();
+//
+//        userDto.setUserId(id);
+//        userDto.setEmail(userDetails.getEmail());
+//        userDto.setFirstName(userDetails.getFirstName());
+//        userDto.setLastName(userDetails.getLastName());
+//
+//        UserDto updatedDto = updateUser(id,userDto);
+//
+//        UserResponse response = new UserResponse();
+//        response.setUserId(updatedDto.getUserId());
+//        response.setEmail(updatedDto.getEmail());
+//        response.setFirstName(updatedDto.getFirstName());
+//        response.setLastName(updatedDto.getLastName());
+//
+//        return response;
+//    }
 }

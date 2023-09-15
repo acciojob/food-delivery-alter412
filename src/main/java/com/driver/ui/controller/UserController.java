@@ -2,6 +2,7 @@ package com.driver.ui.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.driver.model.request.UserDetailsRequestModel;
 import com.driver.model.response.OperationStatusModel;
@@ -40,15 +41,42 @@ public class UserController {
 
 	@PostMapping()
 	public UserResponse createUser(@RequestBody UserDetailsRequestModel userDetails) throws Exception{
-		UserResponse response = us.createUser(userDetails);
-		return response;
+		UserDto userDto = new UserDto();
+
+        userDto.setUserId(String.valueOf(UUID.randomUUID()));
+        userDto.setFirstName(userDetails.getFirstName());
+        userDto.setLastName(userDetails.getLastName());
+        userDto.setEmail(userDetails.getEmail());
+
+		UserDto savedDto = us.createUser(userDto);
+		UserResponse response = new UserResponse();
+        response.setLastName(savedDto.getLastName());
+        response.setFirstName(savedDto.getFirstName());
+        response.setEmail(savedDto.getEmail());
+        response.setUserId(savedDto.getUserId());
+
+        return response;
 	}
 
 	@PutMapping(path = "/{id}")
 	public UserResponse updateUser(@PathVariable String id, @RequestBody UserDetailsRequestModel userDetails) throws Exception{
 
-		UserResponse response = us.updateUser(id,userDetails);
-		return response;
+		UserDto userDto = new UserDto();
+
+        userDto.setUserId(id);
+        userDto.setEmail(userDetails.getEmail());
+        userDto.setFirstName(userDetails.getFirstName());
+        userDto.setLastName(userDetails.getLastName());
+
+        UserDto updatedDto = us.updateUser(id,userDto);
+
+        UserResponse response = new UserResponse();
+        response.setUserId(updatedDto.getUserId());
+        response.setEmail(updatedDto.getEmail());
+        response.setFirstName(updatedDto.getFirstName());
+        response.setLastName(updatedDto.getLastName());
+
+        return response;
 	}
 
 	@DeleteMapping(path = "/{id}")
