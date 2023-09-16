@@ -21,25 +21,56 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserDto createUser(UserDto user) throws Exception {
+    public UserDto createUser(UserDto userDto) throws Exception {
 
-        UserEntity ue = Mapper.userDtoToEntity(user);
+        UserEntity userEntity = new UserEntity();
 
-        UserEntity savedUser = ur.save(ue);
+        userEntity.setEmail(userDto.getEmail());
+        userEntity.setUserId(userDto.getUserId());
+        userEntity.setFirstName(userDto.getFirstName());
+        userEntity.setLastName(userDto.getLastName());
 
-        return Mapper.userEntityToDto(savedUser);
+        UserEntity savedUser = ur.save(userEntity);
+
+        UserDto response = new UserDto();
+
+        response.setId(savedUser.getId());
+        response.setUserId(savedUser.getUserId());
+        response.setEmail(savedUser.getEmail());
+        response.setFirstName(savedUser.getFirstName());
+        response.setLastName(savedUser.getLastName());
+
+        return response;
     }
 
     @Override
     public UserDto getUser(String email) throws Exception {
         UserEntity userEntity = ur.findByEmail(email);
-        return Mapper.userEntityToDto(userEntity);
+
+        UserDto response = new UserDto();
+
+        response.setId(userEntity.getId());
+        response.setUserId(userEntity.getUserId());
+        response.setEmail(userEntity.getEmail());
+        response.setFirstName(userEntity.getFirstName());
+        response.setLastName(userEntity.getLastName());
+
+        return response;
     }
 
     @Override
     public UserDto getUserByUserId(String userId) throws Exception {
         UserEntity userEntity = ur.findByUserId(userId);
-        return Mapper.userEntityToDto(userEntity);
+
+        UserDto response = new UserDto();
+
+        response.setId(userEntity.getId());
+        response.setUserId(userEntity.getUserId());
+        response.setEmail(userEntity.getEmail());
+        response.setFirstName(userEntity.getFirstName());
+        response.setLastName(userEntity.getLastName());
+
+        return response;
     }
 
     @Override
@@ -52,7 +83,15 @@ public class UserServiceImpl implements UserService {
 
         UserEntity updatedUser = ur.save(userEntity);
 
-        return Mapper.userEntityToDto(updatedUser);
+        UserDto response = new UserDto();
+
+        response.setId(updatedUser.getId());
+        response.setUserId(updatedUser.getUserId());
+        response.setEmail(updatedUser.getEmail());
+        response.setFirstName(updatedUser.getFirstName());
+        response.setLastName(updatedUser.getLastName());
+
+        return response;
     }
 
     @Override
@@ -64,48 +103,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> getUsers() {
         Iterable<UserEntity> users = ur.findAll();
+
         List<UserDto> ans = new ArrayList<>();
-        for(UserEntity x: users){
-            ans.add(Mapper.userEntityToDto(x));
+
+        for(UserEntity userEntity: users){
+            UserDto response = new UserDto();
+
+            response.setId(userEntity.getId());
+            response.setUserId(userEntity.getUserId());
+            response.setEmail(userEntity.getEmail());
+            response.setFirstName(userEntity.getFirstName());
+            response.setLastName(userEntity.getLastName());
+
+            ans.add(response);
         }
         return ans;
     }
-
-//    public UserResponse createUser(UserDetailsRequestModel userDetails) throws Exception{
-//        UserDto userDto = new UserDto();
-//        userDto.setUserId(String.valueOf(UUID.randomUUID()));
-//
-//        userDto.setFirstName(userDetails.getFirstName());
-//        userDto.setLastName(userDetails.getLastName());
-//        userDto.setEmail(userDetails.getEmail());
-//
-//        UserDto savedDto = createUser(userDto);
-//
-//        UserResponse response = new UserResponse();
-//        response.setLastName(savedDto.getLastName());
-//        response.setFirstName(savedDto.getFirstName());
-//        response.setEmail(savedDto.getEmail());
-//        response.setUserId(savedDto.getUserId());
-//
-//        return response;
-//    }
-//
-//    public UserResponse updateUser(String id, UserDetailsRequestModel userDetails) throws Exception {
-//        UserDto userDto = new UserDto();
-//
-//        userDto.setUserId(id);
-//        userDto.setEmail(userDetails.getEmail());
-//        userDto.setFirstName(userDetails.getFirstName());
-//        userDto.setLastName(userDetails.getLastName());
-//
-//        UserDto updatedDto = updateUser(id,userDto);
-//
-//        UserResponse response = new UserResponse();
-//        response.setUserId(updatedDto.getUserId());
-//        response.setEmail(updatedDto.getEmail());
-//        response.setFirstName(updatedDto.getFirstName());
-//        response.setLastName(updatedDto.getLastName());
-//
-//        return response;
-//    }
 }
