@@ -26,6 +26,7 @@ public class UserController {
 		UserDto userDto;
 		try {
 			 userDto = us.getUserByUserId(id);
+
 			UserResponse response = new UserResponse();
 
 			response.setEmail(userDto.getEmail());

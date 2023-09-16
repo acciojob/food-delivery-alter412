@@ -62,6 +62,10 @@ public class UserServiceImpl implements UserService {
     public UserDto getUserByUserId(String userId) throws Exception {
         UserEntity userEntity = ur.findByUserId(userId);
 
+        if(userEntity==null){
+            return new UserDto();
+        }
+
         UserDto response = new UserDto();
 
         response.setId(userEntity.getId());
