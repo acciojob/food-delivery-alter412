@@ -70,6 +70,9 @@ public class FoodServiceImpl implements FoodService{
     public FoodDto updateFoodDetails(String foodId, FoodDto foodDetails) throws Exception {
         try{
             FoodEntity foodEntity = fr.findByFoodId(foodId);
+            if(foodEntity==null){
+                return new FoodDto();
+            }
 
             foodEntity.setFoodName(foodDetails.getFoodName());
             foodEntity.setFoodPrice(foodDetails.getFoodPrice());
