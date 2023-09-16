@@ -47,6 +47,10 @@ public class UserServiceImpl implements UserService {
     public UserDto getUser(String email) throws Exception {
         UserEntity userEntity = ur.findByEmail(email);
 
+        if(userEntity==null){
+            return new UserDto();
+        }
+
         UserDto response = new UserDto();
 
         response.setId(userEntity.getId());
@@ -80,6 +84,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto updateUser(String userId, UserDto user) throws Exception {
         UserEntity userEntity = ur.findByUserId(userId);
+
+        if(userEntity==null){
+            return new UserDto();
+        }
 
         userEntity.setLastName(user.getLastName());
         userEntity.setFirstName(user.getFirstName());

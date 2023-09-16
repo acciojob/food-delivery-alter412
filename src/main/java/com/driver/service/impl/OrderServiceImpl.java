@@ -66,6 +66,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDto updateOrderDetails(String orderId, OrderDto order) throws Exception {
         OrderEntity oldOrder = or.findByOrderId(orderId);
+        if(oldOrder==null){
+            return new OrderDto();
+        }
 
         oldOrder.setStatus(order.isStatus());
         oldOrder.setItems(order.getItems());
